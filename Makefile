@@ -7,8 +7,8 @@ OPTFLAGS  =   -O3
 DEFINES   =
 CXXFLAGS  =	-g $(OPTFLAGS) -Wall -Wextra -pedantic $(DEFINES) 
 CXX	  =	g++
-LDLIBS    =     -lglut -lGLEW -lGL
-TARGETS   = 	test
+LDLIBS    =     -lGL -lglut -lGLEW
+TARGETS   = 	triangle shader_utils
 
 # ----- Make Rules -----
 
@@ -16,12 +16,10 @@ all:	$(TARGETS)
 
 clean:
 	rm -f $(TARGETS) *.o
-
-myspell: test.o
-	$(CXX) $(CXXFLAGS) -o test test.o
-
+.PHONY: all clean
 
 # ------ Dependences (.cpp -> .o using default Makefile rule) -----
 
-tests.o: test.cpp test.h
+triangle.o: triangle.cpp shader_utils.h
 
+shader_utils.o: shader_utils.cpp shader_utils.h
