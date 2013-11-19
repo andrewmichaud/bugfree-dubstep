@@ -14,8 +14,8 @@ TARGETS   = 	main
 
 all:	$(TARGETS)
 
-main: triangle.o shader_utils.o
-	$(CXX) -o triangle triangle.cpp shader_utils.cpp $(LDLIBS)
+main: cube.o shader_utils.o
+	$(CXX) -o main cube.cpp shader_utils.cpp $(LDLIBS)
 clean:
 	rm -f $(TARGETS) *.o
 
@@ -23,6 +23,6 @@ clean:
 
 # ------ Dependences (.cpp -> .o using default Makefile rule) -----
 
-triangle.o: triangle.cpp shader_utils.h
+cube.o: cube.cpp shader_utils.h
 
 shader_utils.o: shader_utils.cpp shader_utils.h
