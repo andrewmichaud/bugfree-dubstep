@@ -2,11 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <iostream>
+
 /* Use glew.h instead of gl.h to get all the GL prototypes declared */
 #include <GL/glew.h>
 
 /* Using the GLUT library for the base windowing setup */
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 #include "shader_utils.h"
 
 /* GLM stuff for matrix transformations */
@@ -145,8 +147,9 @@ void onDisplay()
 
 void onIdle()
 {
-    float tau = 2 * 3.14;
+    float tau = 2 * M_PI;
     float elapsedSeconds = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
+    
     // Rotation with translation.
     // -1 <->+1 every 5 seconds
     float move = sinf(elapsedSeconds * tau / 5);
@@ -156,19 +159,23 @@ void onIdle()
 
     glm::vec3 axis_z(0, 0, 1);
 
+    // Defining translate and rotate matrices for convenience.
+    glm::mat4 translate = glm::translate(glm::mat4(1.0f),
+                                         glm::vec3(move, 0.0, 0.0));
+    glm::mat4 rotate    = glm::rotate(glm::mat4(1.0f), angle, axis_z);
+
     // Creating transform matrix.
-    glm::mat4 m_transform = glm::translate(glm::mat4(1.0f), 
-                                           glm::vec3(move, 0.0, 0.0))
-        * glm::rotate(glm::mat4(1.0f), angle, axis_z);
+    glm::mat4 m_transform = translate * rotate;
+
     // Fade in and out
-    float cur_fade = sinf(glutGet(GLUT_ELAPSED_TIME) / 1000.0 * (2*M_PI) / 5) / 
-        2 + 0.5; // 0->1->0 every 5 seconds
+    float cur_fade = sinf(elapsedSeconds * tau / 5) / 
+        2 + 1; // 0->1->0 every 5 seconds
     glUseProgram(program);
     glUniform1f(uniform_fade, cur_fade);
-  
+    
     glUniformMatrix4fv(uniform_m_transform, 1, GL_FALSE, 
             glm::value_ptr(m_transform));
-
+    
     // Redisplay?
     glutPostRedisplay();
 }
@@ -178,7 +185,35 @@ void free_resources()
     glDeleteProgram(program);
     glDeleteBuffers(1, &vbo_triangle);
 }
- 
+
+void reshape (int w, int h) 
+{
+    glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    std::cout << "Keycode is: " << key << std::endl;
+    glm::mat4 translate; 
+    switch (key)
+    {
+        case 27:
+            glutLeaveMainLoop();
+            return;
+        case 'w':
+            std::cout << "asdf" << std::endl;
+            std::cout << "Up!" << std::endl;
+            translate = glm::translate(glm::mat4(1.0f),
+                                         glm::vec3(0.0, 1.0, 0.0));
+            glUseProgram(program);
+            glUniformMatrix4fv(uniform_m_transform, 1, GL_FALSE, 
+            glm::value_ptr(translate));
+            // Redisplay?
+            //glutPostRedisplay();
+            return;
+    }
+}
+
 int main(int argc, char* argv[])
 {
   /* Glut-related initialising functions */
@@ -202,6 +237,7 @@ int main(int argc, char* argv[])
     /* We can display it if everything goes OK */
     glutDisplayFunc(onDisplay);
     glutIdleFunc(onIdle);
+    glutKeyboardFunc(keyboard);
     glutMainLoop();
   }
  
