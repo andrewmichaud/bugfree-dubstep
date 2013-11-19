@@ -18,6 +18,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
+GLint uniform_m_transform;
 GLuint program;
 GLint uniform_fade;
 GLuint vbo_triangle, vbo_triangle_colors;
@@ -80,6 +81,14 @@ int init_resources(void)
       return 0;
   }
 
+  // pass transform matrix
+  uniform_name = "m_transform";
+  uniform_m_transform = glGetUniformLocation(program, uniform_name);
+  if (uniform_m_transform == -1) {
+      fprintf(stderr, "Could not bind uniform %s\n", uniform_name);
+      return 0;
+  }
+
   return 1;
 }
  
@@ -134,12 +143,33 @@ void onDisplay()
     glutSwapBuffers();
 }
 
-void idle()
+void onIdle()
 {
+    float tau = 2 * 3.14;
+    float elapsedSeconds = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
+    // Rotation with translation.
+    // -1 <->+1 every 5 seconds
+    float move = sinf(elapsedSeconds * tau / 5);
+
+    // Rotation
+    float angle = elapsedSeconds * 45;
+
+    glm::vec3 axis_z(0, 0, 1);
+
+    // Creating transform matrix.
+    glm::mat4 m_transform = glm::translate(glm::mat4(1.0f), 
+                                           glm::vec3(move, 0.0, 0.0))
+        * glm::rotate(glm::mat4(1.0f), angle, axis_z);
+    // Fade in and out
     float cur_fade = sinf(glutGet(GLUT_ELAPSED_TIME) / 1000.0 * (2*M_PI) / 5) / 
         2 + 0.5; // 0->1->0 every 5 seconds
     glUseProgram(program);
     glUniform1f(uniform_fade, cur_fade);
+  
+    glUniformMatrix4fv(uniform_m_transform, 1, GL_FALSE, 
+            glm::value_ptr(m_transform));
+
+    // Redisplay?
     glutPostRedisplay();
 }
  
@@ -171,7 +201,7 @@ int main(int argc, char* argv[])
   {
     /* We can display it if everything goes OK */
     glutDisplayFunc(onDisplay);
-    glutIdleFunc(idle);
+    glutIdleFunc(onIdle);
     glutMainLoop();
   }
  
