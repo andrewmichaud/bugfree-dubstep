@@ -21,18 +21,23 @@
 GLuint program;
 GLint uniform_fade;
 GLuint vbo_triangle, vbo_triangle_colors;
-GLint attribute_coord2d, attribute_v_color;
+GLint attribute_coord2d, attribute_v_color, attribute_coord3d;
+
+struct attributes {
+    GLfloat coord3d[3];
+    GLfloat v_color[3];
+};
 
 int init_resources(void)
 {
-    
     GLint link_ok;
-  GLfloat triangle_attributes[] = {
-      -0.8, -0.8,  1.0, 1.0, 0.0,
-       0.8, -0.8,  0.0, 0.0, 1.0,
-       0.0,  0.8,  1.0, 0.0, 0.0,
-  };
-
+    
+    struct attributes triangle_attributes[] = {
+        {{ 0.0,  0.8, 0.0}, {1.0, 1.0, 0.0}},
+        {{-0.8, -0.8, 0.0}, {0.0, 0.0, 1.0}},
+        {{ 0.8, -0.8, 0.0}, {1.0, 0.0, 0.0}}
+    };
+    
   glGenBuffers(1, &vbo_triangle);
   glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
   glBufferData(GL_ARRAY_BUFFER, sizeof(triangle_attributes), triangle_attributes,
@@ -61,16 +66,16 @@ int init_resources(void)
       return 0;
   }
   
-  const char* attribute_name = "coord2d";
-  attribute_coord2d = glGetAttribLocation(program, attribute_name);
-  if (attribute_coord2d == -1) {
-    fprintf(stderr, "Could not bind attribute %s\n", attribute_name);
-    return 0;
-  }
-
-  attribute_name = "v_color";
+  const char* attribute_name = "v_color";
   attribute_v_color = glGetAttribLocation(program, attribute_name);
   if (attribute_v_color == -1) {
+      fprintf(stderr, "Could not bind attribute %s\n", attribute_name);
+      return 0;
+  }
+
+  attribute_name = "coord3d";
+  attribute_coord3d = glGetAttribLocation(program, attribute_name);
+  if (attribute_coord3d == -1) {
       fprintf(stderr, "Could not bind attribute %s\n", attribute_name);
       return 0;
   }
@@ -97,16 +102,17 @@ void onDisplay()
     
     /* Describe our vertices array to OpenGL (it can't guess its format 
      * automatically) 
+     *
      */
     glVertexAttribPointer(
-            attribute_coord2d,      // attribute
-            2,                      // number of elements per vertex, here (r,g,b)
+            attribute_coord3d,      // attribute
+            3,                      // number of elements per vertex, here (r,g,b)
             GL_FLOAT,               // the type of each element
             GL_FALSE,               // take our values as-is
-            5 * sizeof(GLfloat),    // no extra data between each position
+            sizeof(struct attributes),    // no extra data between each position
             0                       // offset of first element
     );
-
+    
     /* Describe our vertices array to OpenGL (it can't guess its format 
      * automatically) 
      */
