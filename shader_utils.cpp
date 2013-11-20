@@ -1,5 +1,5 @@
 // Author: Andrew Michaud
-#include "shader_utils.h"
+#include "shader_utils.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 

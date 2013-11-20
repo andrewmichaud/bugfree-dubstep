@@ -9,7 +9,7 @@
 
 /* Using the GLUT library for the base windowing setup */
 #include <GL/freeglut.h>
-#include "shader_utils.h"
+#include "shader_utils.hpp"
 
 /* GLM stuff for matrix transformations */
 #include <glm/glm.hpp>
