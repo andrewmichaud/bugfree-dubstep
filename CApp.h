@@ -1,6 +1,10 @@
 #ifndef _CAPP_H_
     #define _CAPP_H_
- 
+
+// Header file for main app
+// Andrew Michaud
+// 11/28/13
+
 #include <SDL/SDL.h>
 #include "CSurface.h"
 

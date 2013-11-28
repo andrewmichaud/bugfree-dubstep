@@ -1,5 +1,9 @@
 #include "CApp.h"
 
+// Implementation file for main app
+// Andrew Michaud
+// 11/28/13
+
 CApp::CApp() {
     
     // Keep things tidy by initializing this pointer to null

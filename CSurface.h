@@ -4,6 +4,10 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
+// Header file for surface handling code
+// Andrew Michaud
+// 11/28/13
+
 class CSurface {
     public:
         CSurface();

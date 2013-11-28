@@ -1,5 +1,9 @@
 #include "CSurface.h"
 
+// Surface handling code, implementation file
+// Andrew Michaud
+// 11/28/13
+
 CSurface::CSurface() {
 }
 
