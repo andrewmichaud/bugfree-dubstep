@@ -7,14 +7,14 @@ OPTFLAGS  =   -O3 -march=native
 DEFINES   =
 CXXFLAGS  =	-g $(OPTFLAGS) -Wall -Wextra -pedantic $(DEFINES) 
 CXX	  =	g++
-LDLIBS    =     -lGL -lglut -lGLEW -lm
+LDLIBS    =     -lSDL
 TARGETS   = 	main
 
 # ----- Make Rules -----
 
 all:	$(TARGETS)
 
-main: cube.o shader_utils.o
+main:   CApp.o CSurface.o
 	$(CXX) -o $@ $^ $(LDLIBS)
 clean:
 	rm -f $(TARGETS) *.o
@@ -34,6 +34,7 @@ clean:
 # See http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html
 # ------ Dependences (.cpp -> .o using default Makefile rule) -----
 
-cube.o: cube.cpp shader_utils.hpp
+CApp.o: CApp.cpp CApp.h CSurface.h
 
-shader_utils.o: shader_utils.cpp shader_utils.hpp
+CSurface.o: CSurface.cpp CSurface.h
+
