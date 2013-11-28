@@ -32,7 +32,7 @@ bool CApp::OnInit() {
         return false;
     }
 
-    if ((Surf_Test = CSurface::OnLoad("smile.bmp")) == NULL) {
+    if ((Surf_Test = CSurface::OnLoad("test.png")) == NULL) {
         return false;
     }
 
@@ -56,6 +56,7 @@ void CApp::OnRender() {
 
     // Draw
     CSurface::OnDraw(Surf_Display, Surf_Test, 0, 0);
+    CSurface::OnDraw(Surf_Display, Surf_Test, 100, 100, 0, 0, 50, 50);
 
     // Refresh the buffer.
     SDL_Flip(Surf_Display);

@@ -7,7 +7,7 @@ OPTFLAGS  =   -O3 -march=native
 DEFINES   =
 CXXFLAGS  =	-g $(OPTFLAGS) -Wall -Wextra -pedantic $(DEFINES) 
 CXX	  =	g++
-LDLIBS    =     -lSDL
+LDLIBS    =     -lSDLmain -lSDL -lSDL_image 
 TARGETS   = 	main
 
 # ----- Make Rules -----

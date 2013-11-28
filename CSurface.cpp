@@ -8,7 +8,7 @@ SDL_Surface* CSurface::OnLoad(char* File) {
     SDL_Surface* Surf_Return = NULL;
 
     // Load surface
-    if ((Surf_Temp = SDL_LoadBMP(File)) == NULL) {
+    if ((Surf_Temp = IMG_Load(File)) == NULL) {
         return NULL;
     }
 
@@ -46,3 +46,36 @@ bool CSurface::OnDraw(SDL_Surface* Surf_Dest, SDL_Surface* Surf_Src, int X, int 
     return true;
 }
 
+// Second draw function, used to draw only part of an image.
+// Do this
+// Take:
+// Destination surface
+// Source surface (surface we use to draw on destinatino)
+// X and Y position we are drawing to
+bool CSurface::OnDraw(SDL_Surface* Surf_Dest, SDL_Surface* Surf_Src, int X, int Y,
+                      int X2, int Y2, int W, int H) {
+    
+    // Is our surface valid?
+    if (Surf_Dest == NULL || Surf_Src == NULL) {
+        return false;
+    }
+
+    SDL_Rect DestR;
+
+    // Assign coordinates to destination surface
+    DestR.x = X;
+    DestR.y = Y;
+
+    // Draw rectangle specifying which part of the source image we are drawing
+    SDL_Rect SrcR;
+
+    SrcR.x = X2;
+    SrcR.y = Y2;
+    SrcR.w = W;
+    SrcR.h = H;
+
+    // Draw image on.
+    SDL_BlitSurface(Surf_Src, &SrcR, Surf_Dest, &DestR);
+
+    return true;
+}
