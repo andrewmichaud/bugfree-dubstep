@@ -14,7 +14,7 @@ TARGETS   = 	main
 
 all:	$(TARGETS)
 
-main:   CApp.o CSurface.o
+main:   CApp.o CSurface.o CEvent.o CAnimation.o
 	$(CXX) -o $@ $^ $(LDLIBS)
 clean:
 	rm -f $(TARGETS) *.o
@@ -34,7 +34,10 @@ clean:
 # See http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html
 # ------ Dependences (.cpp -> .o using default Makefile rule) -----
 
-CApp.o: CApp.cpp CApp.h CSurface.h
+CApp.o: CApp.cpp CApp.h CSurface.h CEvent.h CAnimation.h
 
 CSurface.o: CSurface.cpp CSurface.h
 
+CEvent.o: CEvent.cpp CEvent.h
+
+CAnimation.o: CAnimation.cpp CAnimation.h

@@ -17,6 +17,10 @@ CApp::CApp() {
  
 bool CApp::OnInit() {
     
+    // Animation stuff
+    Anim_Yoshi.MaxFrames = 8;
+    Anim_Yoshi.Oscillate = false;
+    
     // Attempt to init SDL. If it fails, return false.
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         return false;
@@ -36,7 +40,7 @@ bool CApp::OnInit() {
         return false;
     }
 
-    if ((Surf_Test = CSurface::OnLoad("test.png")) == NULL) {
+    if ((Surf_Test = CSurface::OnLoad("yoshis.bmp")) == NULL) {
         return false;
     }
 
@@ -46,21 +50,33 @@ bool CApp::OnInit() {
 // What to do with events.
 void CApp::OnEvent(SDL_Event* Event) {
     
+    // Pass to CEvent class
+    CEvent::OnEvent(Event);
+#if 0
     // Handle quitting.
     // Look for this thing and end program if we see it.
     if (Event->type == SDL_QUIT) {
         Running = false;
     }
+#endif
+}
+
+void CApp::OnExit() {
+    Running = false;
 }
 
 void CApp::OnLoop() {
+    // For animatino
+    Anim_Yoshi.OnAnimate();
 }
 
 void CApp::OnRender() {
 
     // Draw
-    CSurface::OnDraw(Surf_Display, Surf_Test, 0, 0);
-    CSurface::OnDraw(Surf_Display, Surf_Test, 100, 100, 0, 0, 50, 50);
+    //CSurface::OnDraw(Surf_Display, Surf_Test, 0, 0);
+    //CSurface::OnDraw(Surf_Display, Surf_Test, 100, 100, 0, 0, 50, 50);
+    CSurface::OnDraw(Surf_Display, Surf_Test, 290, 220, 0, 
+                     Anim_Yoshi.GetCurrentFrame() * 64, 64, 64);
 
     // Refresh the buffer.
     SDL_Flip(Surf_Display);
