@@ -35,14 +35,30 @@ bool CApp::OnInit() {
     // First: Use hardware memory to store stuff.
     // Second: Use double buffering
     // Note: SDL_FULLSCREEN to force fullscreen
-    if ((Surf_Display = SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE | 
+    if ((Surf_Display = SDL_SetVideoMode(WWIDTH, WHEIGHT, 32, SDL_HWSURFACE | 
                                                        SDL_DOUBLEBUF)) == NULL) {
         return false;
     }
 
+#if 0
     if ((Surf_Test = CSurface::OnLoad("femplayermap.png")) == NULL) {
         return false;
     }
+#endif
+
+    // Load two entities
+    if (Entity1.OnLoad("entity1.bmp", 64, 64, 8) == false) {
+        return false;
+    }
+
+    if (Entity2.OnLoad("entity2.bmp", 64, 64, 8) == false) {
+        return false;
+    }
+
+    Entity2.X = 100;
+
+    CEntity::EntityList.push_back(&Entity1);
+    CEntity::EntityList.push_back(&Entity2);
 
     return true;
 }
@@ -66,8 +82,18 @@ void CApp::OnExit() {
 }
 
 void CApp::OnLoop() {
-    // For animatino
+    // For animation
     Anim_Yoshi.OnAnimate();
+    
+    // Animate all entities.
+    for (int i = 0; i < CEntity::EntityList.size(); i++) {
+
+        if (!CEntity::EntityList[i]) {
+            continue;
+        }
+
+        CEntity::EntityList[i]->OnLoop();
+    }
 }
 
 void CApp::OnRender() {
@@ -78,6 +104,17 @@ void CApp::OnRender() {
     //CSurface::OnDraw(Surf_Display, Surf_Test, 100, 100, 0, 0, 50, 50);
     CSurface::OnDraw(Surf_Display, Surf_Test, 290, 220, 0, 
                      Anim_Yoshi.GetCurrentFrame() * spriteheight, 64, spriteheight);
+
+    // Draw all entities
+    for (int i = 0; i < CEntity::EntityList.size(); i++) {
+     
+        // Error checking
+        if (!CEntity::EntityList[i]) {
+            continue;
+        }
+
+        CEntity::EntityList[i]->OnRender(Surf_Display);
+    }
 
     // Refresh the buffer.
     SDL_Flip(Surf_Display);
@@ -93,6 +130,18 @@ void CApp::OnCleanup() {
     SDL_FreeSurface(Surf_Test);
     SDL_FreeSurface(Surf_Display);
     
+    // Clean up Entities
+    for (int i = 0; i < CEntity::EntityList.size(); i++) {
+
+        // Error checking
+        if (!CEntity::EntityList[i]) {
+            continue;
+        }
+
+        CEntity::EntityList[i]->OnCleanup();
+    }
+
+    CEntity::EntityList.clear();
     
     // Just quit
     SDL_Quit();

@@ -9,6 +9,7 @@
 #include "CAnimation.h"
 #include "CEvent.h"
 #include "CSurface.h"
+#include "CEntity.h"
 
 class CApp : public CEvent {
 
@@ -20,6 +21,9 @@ class CApp : public CEvent {
         SDL_Surface*    Surf_Test;
     
         CAnimation      Anim_Yoshi;
+
+        CEntity         Entity1;
+        CEntity         Entity2;
 
     public:
  
