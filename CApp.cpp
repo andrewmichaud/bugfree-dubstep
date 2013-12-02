@@ -40,7 +40,7 @@ bool CApp::OnInit() {
         return false;
     }
 
-    if ((Surf_Test = CSurface::OnLoad("yoshis.bmp")) == NULL) {
+    if ((Surf_Test = CSurface::OnLoad("femplayermap.png")) == NULL) {
         return false;
     }
 
@@ -72,11 +72,12 @@ void CApp::OnLoop() {
 
 void CApp::OnRender() {
 
+    int spriteheight = 128;
     // Draw
     //CSurface::OnDraw(Surf_Display, Surf_Test, 0, 0);
     //CSurface::OnDraw(Surf_Display, Surf_Test, 100, 100, 0, 0, 50, 50);
     CSurface::OnDraw(Surf_Display, Surf_Test, 290, 220, 0, 
-                     Anim_Yoshi.GetCurrentFrame() * 64, 64, 64);
+                     Anim_Yoshi.GetCurrentFrame() * spriteheight, 64, spriteheight);
 
     // Refresh the buffer.
     SDL_Flip(Surf_Display);
