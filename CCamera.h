@@ -12,7 +12,7 @@
 enum {
     TARGET_MODE_NORMAL = 0,
     TARGET_MODE_CENTER
-}
+};
 
 class CCamera {
     public:
@@ -28,20 +28,16 @@ class CCamera {
     public:
         int TargetMode;
 
-    public:
         CCamera();
 
-    public:
         void OnMove(int MoveX, int MoveY);
         
-    public:
         int GetX();
         int GetY();
 
-    public:
-        void SetPos(int X, int Y);
+        void SetPos(int posX, int posY);
         
-        void SetTarget(int* X, int* Y);
+        void SetTarget(int* targetX, int* targetY);
 };
 
 #endif // CCAMERA_H defined

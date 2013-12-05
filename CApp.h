@@ -5,11 +5,17 @@
 // Andrew Michaud
 // 11/28/13
 
+#include <string>
+
 #include <SDL/SDL.h>
 #include "CAnimation.h"
 #include "CEvent.h"
 #include "CSurface.h"
 #include "CEntity.h"
+#include "CArea.h"
+#include "CCamera.h"
+
+#include "Define.h"
 
 class CApp : public CEvent {
 
@@ -44,6 +50,8 @@ class CApp : public CEvent {
         void OnRender();
 
         void OnCleanup();
+
+        void OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode);
 
 };
  

@@ -3,6 +3,7 @@
 // 12/05/13
 
 #include "CMap.h"
+#include <iostream>
 
 CMap::CMap() {
     Surf_Tileset = NULL;
@@ -25,7 +26,7 @@ bool CMap::OnLoad(char* File) {
     // Fill tileList
     for (int Y = 0; Y < MAP_HEIGHT; Y++) {
         for (int X = 0; X < MAP_WIDTH; X++) {
-            CTile tempFile;
+            CTile tempTile;
 
             // Read in one tile
             fscanf(FileHandle, "%d:%d ", &tempTile.TileID, &tempTile.TypeID);
@@ -54,7 +55,7 @@ void CMap::OnRender(SDL_Surface* Surf_Display, int MapX, int MapY) {
     // Store tileset width and height
     int TilesetWidth = Surf_Tileset->w / TILE_SIZE;
     int TilesetHeight = Surf_Tileset->h / TILE_SIZE;
-
+    //std::cout << "Got tileset dims" << std::endl;
     int ID = 0;
 
     // Draw tiles
@@ -76,10 +77,11 @@ void CMap::OnRender(SDL_Surface* Surf_Display, int MapX, int MapY) {
 
             // Draw
             CSurface::OnDraw(Surf_Display, Surf_Tileset, tX, tY, 
-                             TilesetX, tilesetY, TILE_SIZE, TILE_SIZE);
+                             TilesetX, TilesetY, TILE_SIZE, TILE_SIZE);
 
             ID++;
         }
     }
+    //std::cout << "Map rendering done" << std::endl;
 }
 

@@ -3,6 +3,7 @@
 // 12/05/13
 
 #include "CArea.h"
+#include <iostream>
 
 CArea CArea::AreaControl;
 
@@ -14,6 +15,7 @@ CArea::CArea() {
 // Loading function
 bool CArea::OnLoad(char* File) {
     
+    std::cout << "trying to load" << std::endl;
     // Clear MapList before we load.
     MapList.clear();
 
@@ -25,21 +27,27 @@ bool CArea::OnLoad(char* File) {
         return false;
     }
 
+    std::cout << "ahve file" << std::endl;
+
     // Allocate space for TileSet
     char TilesetFile[255];
 
     fscanf(FileHandle, "%s\n", TilesetFile);
 
-    // Attempt to file tileset.  Error out if this fails.
+    // Attempt to load tileset.  Error out if this fails.
     if ((Surf_Tileset = CSurface::OnLoad(TilesetFile)) == false) {
+        std::cout << TilesetFile << std::endl;
         fclose(FileHandle);
 
         return false;
     }
 
+    std::cout << "have tileset" << std::endl;
+
     // Load area
     fscanf(FileHandle, "%d\n", &AreaSize);
 
+    std::cout << "area loaede" << std::endl;
     // Fill MapList
     for (int X = 0; X < AreaSize; X++) {
         for (int Y = 0; Y < AreaSize; Y++) {
@@ -61,9 +69,11 @@ bool CArea::OnLoad(char* File) {
             MapList.push_back(tempMap);
         }
 
-        scanf(FileHandle, "\n");
+        fscanf(FileHandle, "\n");
 
     }
+
+    std::cout << "tiles done" << std::endl;
 
     // Close file and successfully return.
     fclose(FileHandle);
@@ -78,10 +88,13 @@ void CArea::OnRender(SDL_Surface* Surf_Display, int CameraX, int CameraY) {
     int MapWidth  = MAP_WIDTH * TILE_SIZE;
     int MapHeight = MAP_HEIGHT * TILE_SIZE;
 
+    std::cout << "CArea::OnRender:: vars done" << std::endl;
     // Set first ID
     int FirstID = -CameraX / MapWidth;
     FirstID += (-CameraY / MapHeight) * AreaSize;
 
+    std::cout << "areasize: " << AreaSize << std::endl;
+    std::cout << "CArea::OnRender:: first id" << std::endl;
     // Render maps
     // TODO: get rid of magic numbers sometime.
     for (int i = 0; i < 4; i++) {
@@ -95,10 +108,13 @@ void CArea::OnRender(SDL_Surface* Surf_Display, int CameraX, int CameraY) {
         // Set position
         int X = ((ID % AreaSize) * MapWidth) + CameraX;
         int Y = ((ID / AreaSize) * MapHeight) + CameraY;
-
+        std::cout << "X: " << X << std::endl;
+        std::cout << "Y: " << Y << std::endl;
         // Render map
         MapList[ID].OnRender(Surf_Display, X, Y);
+        std::cout << "it: " << i << std::endl;
     }
+    std::cout << "CArea::OnRender:: maps done" << std::endl;
 }
 
 // Cleanup function
