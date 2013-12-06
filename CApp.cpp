@@ -1,4 +1,5 @@
 #include "CApp.h"
+#include <iostream>
 
 // Implementation file for main app
 // Andrew Michaud
@@ -36,67 +37,38 @@ bool CApp::OnInit() {
     // Second: Use double buffering
     // Note: SDL_FULLSCREEN to force fullscreen
     if ((Surf_Display = SDL_SetVideoMode(WWIDTH, WHEIGHT, 32, SDL_HWSURFACE | 
-                                                       SDL_DOUBLEBUF)) == NULL) {
+                                         SDL_DOUBLEBUF)) == NULL) {
+        return false;
+    }
+    
+    std::string area = "maps/1.area";
+    char* area_c = (char*) area.c_str();
+
+
+    //  Init area
+    if (CArea::AreaControl.OnLoad(area_c) == false) {
         return false;
     }
 
-#if 0
-    if ((Surf_Test = CSurface::OnLoad("femplayermap.png")) == NULL) {
-        return false;
-    }
-#endif
-
-#if 0
-    char* ent1 = "entity1.bmp".c_str();
-    char* ent2 = "entity2.bmp".c_str();
-    #endif
-
-    // Load entities
-        
-
-    // std::cout << "Here" << std::endl;
-    // Load two entities
-    if (Entity1.OnLoad("entity1.bmp", 64, 64, 8) == false) {
-        return false;
-    }
-
-    if (Entity2.OnLoad("entity2.bmp", 64, 64, 8) == false) {
-        return false;
-    }
-
-    Entity2.X = 100;
+    std::string player = "yoshi.png";
+    char* player_c = (char*) player.c_str();
 
     // Create players.
-    if (!Player.OnLoad("yoshi.png", 64, 64, 8)) {
+    if (!Player.OnLoad(player_c, 64, 64, 8)) {
         return false;
     }
 
-    if (!Player2.OnLoad("yoshi.png", 64, 64, 8)) {
-        return false;
-    }
-
-    Player2.X = 100;
+    Player.X = 100;
 
     CEntity::EntityList.push_back(&Player);
-    CEntity::EntityList.push_back(&Player2);
 
 
     // Make cameras follow yoshi
     CCamera::CameraControl.TargetMode = TARGET_MODE_CENTER;
     CCamera::CameraControl.SetTarget(&Player.X, &Player.Y);
 
-    //std::cout << "ssssss" << std::endl;
-    //  Init area
-    if (CArea::AreaControl.OnLoad("maps/1.area") == false) {
-        //std::cout << "false" << std::endl;
-        return false;
-    }
-
-    //std::cout << "asfas" << std::endl;
-
     SDL_EnableKeyRepeat(1, SDL_DEFAULT_REPEAT_INTERVAL / 3);
 
-    //std::cout << "init done" << std::endl;
     return true;
 }
 
@@ -120,43 +92,67 @@ void CApp::OnExit() {
 
 // Handle keypresses
 void CApp::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
-    switch (sym) {
-        // Camera follows player, this is unneeded when movement works.
-        case SDLK_UP:       
-            break;
-        case SDLK_DOWN:
-            break;
-        case SDLK_LEFT:
-            Player.MoveLeft = true; 
-            break;
-        case SDLK_RIGHT:
-            Player.MoveRight = true;
-            break;
-        case SDLK_SPACE:
-            Player.Jump();
-            break;
+    
+    // Modification keys
+    switch (mod) {
         default:
+            switch (sym) {
+                
+                // Movement
+                case SDLK_UP:       
+                    break;
+                case SDLK_DOWN:
+                    break;
+                case SDLK_LEFT:
+                    Player.MoveLeft = true; 
+                    break;
+                case SDLK_RIGHT:
+                    Player.MoveRight = true;
+                    break;
+                
+                // Jump
+                case SDLK_SPACE:
+                    Player.Jump();
+                    break;
+                
+                // Escape
+                case SDLK_ESCAPE:
+                    Running = false;
+                    break;
+                default:
+                    break;
+            }
             break;
+    }
+
+    switch (unicode) {
     }
 }
 
 // Handle keyunpresses
 void CApp::OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode) {
-    switch (sym) {
-        // Camera follows player, this is unneeded when movement works.
-        case SDLK_UP:       
-            break;
-        case SDLK_DOWN:
-            break;
-        case SDLK_LEFT:
-            Player.MoveLeft = false; 
-            break;
-        case SDLK_RIGHT:
-            Player.MoveRight = false;
-            break;
+    switch (mod) {
         default:
+            switch (sym) {
+                case SDLK_UP:       
+                    break;
+                case SDLK_DOWN:
+                    break;
+                case SDLK_LEFT:
+                    Player.MoveLeft = false; 
+                    break;
+                case SDLK_RIGHT:
+                    Player.MoveRight = false;
+                    break;
+                default:
+                    break;
+            }
             break;
     }
+
+    switch (unicode) {
+    }
+    
 }
 
 void CApp::OnLoop() {
@@ -204,6 +200,11 @@ void CApp::OnRender() {
     std::cout << "sprite drawn" << std::endl;
 #endif
 
+    // Render area
+    CArea::AreaControl.OnRender(Surf_Display,
+                                -CCamera::CameraControl.GetX(),
+                                -CCamera::CameraControl.GetY());
+
 #if 1
     // Draw all entities
     for (unsigned i = 0; i < CEntity::EntityList.size(); i++) {
@@ -216,13 +217,7 @@ void CApp::OnRender() {
         CEntity::EntityList[i]->OnRender(Surf_Display);
     }
 
-    std::cout << "entities done" << std::endl;
 #endif
-
-    // Render area
-    CArea::AreaControl.OnRender(Surf_Display,
-                                -CCamera::CameraControl.GetX(),
-                                -CCamera::CameraControl.GetY());
 
     //std::cout << "area done" << std::endl;
     // Refresh the buffer.
