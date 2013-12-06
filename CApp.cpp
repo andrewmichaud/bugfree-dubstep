@@ -132,6 +132,9 @@ void CApp::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
         case SDLK_RIGHT:
             Player.MoveRight = true;
             break;
+        case SDLK_SPACE:
+            Player.Jump();
+            break;
         default:
             break;
     }
@@ -169,6 +172,23 @@ void CApp::OnLoop() {
 
         CEntity::EntityList[i]->OnLoop();
     }
+
+    // Collision Events
+    for (unsigned i = 0; i != CEntityCol::EntityColList.size(); i++) {
+        CEntity* EntityA = CEntityCol::EntityColList[i].EntityA;
+        CEntity* EntityB = CEntityCol::EntityColList[i].EntityB;
+
+        // Check for null pointers
+        if (EntityA == NULL || EntityB == NULL) {
+            continue;
+        }
+
+        if (EntityA->OnCollision(EntityA)) {
+            EntityB->OnCollision(EntityB);
+        }
+    }
+
+    CEntityCol::EntityColList.clear();
 }
 
 void CApp::OnRender() {

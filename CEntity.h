@@ -81,7 +81,13 @@ class CEntity {
         int             Col_Y;
         int             Col_Width;
         int             Col_Height;
-        
+
+    protected:
+        bool            CanJump;
+
+    public: 
+        bool            Jump();
+
     // Constructors, destructors
     public:
         CEntity();
@@ -100,7 +106,7 @@ class CEntity {
 
         virtual void OnAnimate();
 
-        virtual void OnCollision(CEntity* Entity);
+        virtual bool OnCollision(CEntity* Entity);
 
         void         OnMove(float MoveX, float MoveY);
 

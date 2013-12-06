@@ -55,6 +55,9 @@ void CPlayer::OnAnimate() {
 }
 
 // Collisions
-void CPlayer::OnCollision(CEntity* Entity) {
+bool CPlayer::OnCollision(CEntity* Entity) {
+    Jump();
+
+    return true;
 }
 

@@ -21,7 +21,7 @@ class CPlayer : public CEntity {
 
         void OnAnimate();
 
-        void OnCollision(CEntity* Entity);
+        bool OnCollision(CEntity* Entity);
 };
 
 

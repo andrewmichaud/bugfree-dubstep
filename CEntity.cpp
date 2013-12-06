@@ -11,8 +11,8 @@ std::vector<CEntity*> CEntity::EntityList;
 std::vector<CEntityCol> CEntityCol::EntityColList;
 
 CEntityCol::CEntityCol() {
-    EntityA = NULL;
-    EntityB = NULL;
+    this->EntityA = NULL;
+    this->EntityB = NULL;
 }
 
 // CEntity constructor.
@@ -51,6 +51,8 @@ CEntity::CEntity() {
 
     Col_Width = 0;
     Col_Height = 0;
+
+    CanJump = false;
 
 }
 
@@ -165,11 +167,13 @@ void CEntity::OnAnimate() {
 
 // Handle collisions.
 // Overridden on a per-entity basis
-void CEntity::OnCollision(CEntity* Entity) {
+bool CEntity::OnCollision(CEntity* Entity) {
 }
 
 // Handle movement
 void CEntity::OnMove(float MoveX, float MoveY) {
+
+    CanJump = false;
 
     // Not moving is pretty simple
     if (MoveX == 0 && MoveY == 0) {
@@ -243,6 +247,12 @@ void CEntity::OnMove(float MoveX, float MoveY) {
             
             // Stop if we can't.
             } else {
+
+                // Jumping
+                if (MoveY > 0) {
+                    CanJump = true;
+                }
+
                 SpeedY = 0;
             }
         }
@@ -280,6 +290,19 @@ void CEntity::OnMove(float MoveX, float MoveY) {
             break;
         }
     }
+}
+
+// Cause player to jump
+bool CEntity::Jump() {
+
+    // Only jump if we can
+    if (!CanJump) {
+        return false;
+    }
+
+    SpeedY = -MaxSpeedY;
+
+    return true;
 }
 
 // Stop movement
