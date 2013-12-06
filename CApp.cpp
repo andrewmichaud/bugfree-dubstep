@@ -105,6 +105,8 @@ void CApp::OnExit() {
 // Handle keypresses
 void CApp::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
     switch (sym) {
+        // Camera follows player, this is unneeded when movement works.
+#if 0
         case SDLK_UP:       
             CCamera::CameraControl.OnMove( 0,  5);
             break;
@@ -117,7 +119,7 @@ void CApp::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
         case SDLK_RIGHT:
             CCamera::CameraControl.OnMove( -5, 0);
             break;
-
+#endif
         default:
             break;
     }
