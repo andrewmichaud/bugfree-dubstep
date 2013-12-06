@@ -85,3 +85,17 @@ void CMap::OnRender(SDL_Surface* Surf_Display, int MapX, int MapY) {
     //std::cout << "Map rendering done" << std::endl;
 }
 
+// Get Tile from coordinates
+CTile* CMap::GetTile(int X, int Y) {
+
+    int ID = X / TILE_SIZE;
+    ID += (MAP_WIDTH * (Y / TILE_SIZE));
+
+    // Bounds checking
+    if (ID < 0 && ID >= TileList.size()) {
+        return NULL;
+    }
+
+    return &TileList[ID];
+}
+

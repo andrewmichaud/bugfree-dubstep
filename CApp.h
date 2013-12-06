@@ -14,6 +14,7 @@
 #include "CEntity.h"
 #include "CArea.h"
 #include "CCamera.h"
+#include "CPlayer.h"
 
 #include "Define.h"
 
@@ -30,6 +31,9 @@ class CApp : public CEvent {
 
         CEntity         Entity1;
         CEntity         Entity2;
+
+        CPlayer         Player;
+        CPlayer         Player2;
 
     public:
  
@@ -53,6 +57,7 @@ class CApp : public CEvent {
 
         void OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode);
 
+        void OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode);
 };
  
 #endif

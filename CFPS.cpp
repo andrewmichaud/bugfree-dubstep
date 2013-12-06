@@ -2,6 +2,8 @@
 // CFPS implementation file
 // 12/05/13
 
+#include "CFPS.h"
+
 CFPS CFPS::FPSControl;
 
 CFPS::CFPS() {

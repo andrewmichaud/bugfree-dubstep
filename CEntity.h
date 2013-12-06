@@ -6,6 +6,7 @@
 // 12/02/13
 
 #include <vector>
+#include "CArea.h"
 #include "CAnimation.h"
 #include "CCamera.h"
 #include "CFPS.h"

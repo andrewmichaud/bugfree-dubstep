@@ -54,7 +54,7 @@ bool CApp::OnInit() {
     // Load entities
         
 
-    std::cout << "Here" << std::endl;
+    // std::cout << "Here" << std::endl;
     // Load two entities
     if (Entity1.OnLoad("entity1.bmp", 64, 64, 8) == false) {
         return false;
@@ -66,21 +66,37 @@ bool CApp::OnInit() {
 
     Entity2.X = 100;
 
-    CEntity::EntityList.push_back(&Entity1);
-    CEntity::EntityList.push_back(&Entity2);
-
-    std::cout << "ssssss" << std::endl;
-    //  Init area
-    if (CArea::AreaControl.OnLoad("maps/1.area") == false) {
-        std::cout << "false" << std::endl;
+    // Create players.
+    if (!Player.OnLoad("yoshi.png", 64, 64, 8)) {
         return false;
     }
 
-    std::cout << "asfas" << std::endl;
+    if (!Player2.OnLoad("yoshi.png", 64, 64, 8)) {
+        return false;
+    }
+
+    Player2.X = 100;
+
+    CEntity::EntityList.push_back(&Player);
+    CEntity::EntityList.push_back(&Player2);
+
+
+    // Make cameras follow yoshi
+    CCamera::CameraControl.TargetMode = TARGET_MODE_CENTER;
+    CCamera::CameraControl.SetTarget(&Player.X, &Player.Y);
+
+    //std::cout << "ssssss" << std::endl;
+    //  Init area
+    if (CArea::AreaControl.OnLoad("maps/1.area") == false) {
+        //std::cout << "false" << std::endl;
+        return false;
+    }
+
+    //std::cout << "asfas" << std::endl;
 
     SDL_EnableKeyRepeat(1, SDL_DEFAULT_REPEAT_INTERVAL / 3);
 
-    std::cout << "init done" << std::endl;
+    //std::cout << "init done" << std::endl;
     return true;
 }
 
@@ -106,20 +122,35 @@ void CApp::OnExit() {
 void CApp::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
     switch (sym) {
         // Camera follows player, this is unneeded when movement works.
-#if 0
         case SDLK_UP:       
-            CCamera::CameraControl.OnMove( 0,  5);
             break;
         case SDLK_DOWN:
-            CCamera::CameraControl.OnMove( 0, -5);
             break;
         case SDLK_LEFT:
-            CCamera::CameraControl.OnMove( 5,  0);
+            Player.MoveLeft = true; 
             break;
         case SDLK_RIGHT:
-            CCamera::CameraControl.OnMove( -5, 0);
+            Player.MoveRight = true;
             break;
-#endif
+        default:
+            break;
+    }
+}
+
+// Handle keyunpresses
+void CApp::OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode) {
+    switch (sym) {
+        // Camera follows player, this is unneeded when movement works.
+        case SDLK_UP:       
+            break;
+        case SDLK_DOWN:
+            break;
+        case SDLK_LEFT:
+            Player.MoveLeft = false; 
+            break;
+        case SDLK_RIGHT:
+            Player.MoveRight = false;
+            break;
         default:
             break;
     }
@@ -128,9 +159,9 @@ void CApp::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
 void CApp::OnLoop() {
     // For animation
     Anim_Yoshi.OnAnimate();
-    
+    CFPS::FPSControl.OnLoop();
     // Animate all entities.
-    for (int i = 0; i < CEntity::EntityList.size(); i++) {
+    for (unsigned i = 0; i < CEntity::EntityList.size(); i++) {
 
         if (!CEntity::EntityList[i]) {
             continue;
@@ -142,7 +173,7 @@ void CApp::OnLoop() {
 
 void CApp::OnRender() {
 
-    int spriteheight = 64;
+    //int spriteheight = 64;
     // Draw
     //CSurface::OnDraw(Surf_Display, Surf_Test, 0, 0);
     //CSurface::OnDraw(Surf_Display, Surf_Test, 100, 100, 0, 0, 50, 50);
@@ -153,9 +184,9 @@ void CApp::OnRender() {
     std::cout << "sprite drawn" << std::endl;
 #endif
 
-#if 0
+#if 1
     // Draw all entities
-    for (int i = 0; i < CEntity::EntityList.size(); i++) {
+    for (unsigned i = 0; i < CEntity::EntityList.size(); i++) {
      
         // Error checking
         if (!CEntity::EntityList[i]) {
@@ -170,14 +201,14 @@ void CApp::OnRender() {
 
     // Render area
     CArea::AreaControl.OnRender(Surf_Display,
-                                CCamera::CameraControl.GetX(),
-                                CCamera::CameraControl.GetY());
+                                -CCamera::CameraControl.GetX(),
+                                -CCamera::CameraControl.GetY());
 
-    std::cout << "area done" << std::endl;
+    //std::cout << "area done" << std::endl;
     // Refresh the buffer.
     SDL_Flip(Surf_Display);
 
-    std::cout << "render done" << std::endl;
+    //std::cout << "render done" << std::endl;
 
 }
 
@@ -191,7 +222,7 @@ void CApp::OnCleanup() {
     SDL_FreeSurface(Surf_Display);
     
     // Clean up Entities
-    for (int i = 0; i < CEntity::EntityList.size(); i++) {
+    for (unsigned i = 0; i < CEntity::EntityList.size(); i++) {
 
         // Error checking
         if (!CEntity::EntityList[i]) {
@@ -240,7 +271,7 @@ int CApp::OnExecute() {
     return 0;
 }
 
-int main(int argc, char* argv[]) {
+int main() {
     CApp theApp;
  
     return theApp.OnExecute();

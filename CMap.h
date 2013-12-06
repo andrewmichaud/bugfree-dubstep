@@ -27,6 +27,7 @@ class CMap {
         void OnRender(SDL_Surface* Surf_Display,
                       int MapX, int MapY);
 
+        CTile* GetTile(int X, int Y);
 };
 #endif // CMAP_H defined
 

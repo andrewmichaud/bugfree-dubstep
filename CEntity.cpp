@@ -52,7 +52,6 @@ CEntity::CEntity() {
     Col_Width = 0;
     Col_Height = 0;
 
-    AnimState = 0;
 }
 
 CEntity::~CEntity() {
@@ -353,3 +352,89 @@ bool CEntity::PosValid(int NewX, int NewY) {
 
     // Start position
     int StartX      = (NewX + Col_X) / TILE_SIZE;
+    int StartY      = (NewY + Col_Y) / TILE_SIZE;
+
+    // End position (intended)
+    int EndX        = ((NewX + Col_X) + Width - Col_Width - 1) / TILE_SIZE;
+    int EndY        = ((NewY + Col_Y) + Height - Col_Height - 1) / TILE_SIZE;
+
+    // Check all tiles between our start and end positions.
+    for (int iY = StartY; iY <= EndY; iY++) {
+        for (int iX = StartX; iX <= EndX; iX++) {
+            CTile* Tile = CArea::AreaControl.GetTile(iX * TILE_SIZE,
+                                                     iY * TILE_SIZE);
+            // Return false if any tile is invalid
+            if (!PosValidTile(Tile)) { 
+                Return = false;
+            }
+        }
+    }
+
+    // Check collisions with entities, if we collide with entities.
+    if (Flags & ENTITY_FLAG_MAPONLY) {
+        // Do nothing
+    } else {
+        
+        // Check all entities
+        for (int i = 0; i != EntityList.size(); i++) {
+            if (PosValidEntity(EntityList[i], NewX, NewY) == false) {
+                Return = false;
+            }
+        }
+    }
+
+    return Return;
+}
+
+// Can a tile be moved over?
+bool CEntity::PosValidTile(CTile* Tile) {
+
+    // We can move over a null tile
+    if (Tile == NULL) {
+        return true;
+    }
+
+    // We cannot move over tiles of type TILE_TYPE_BLOCK
+    if (Tile->TypeID == TILE_TYPE_BLOCK) {
+        return false;
+    }
+
+    return true;
+}
+
+// Are we colliding with any entity?
+bool CEntity::PosValidEntity(CEntity* Entity, int NewX, int NewY) {
+    
+    // Check if the entity is us, null, or dead
+    // Also check that we don't have the MAPONLY flag on.
+    // If all checks pass, see if we're colliding.
+    if (this != Entity && Entity != NULL && Entity->Dead == false &&
+        Entity->Flags ^ ENTITY_FLAG_MAPONLY &&
+        Entity->Collides(NewX + Col_X,
+                         NewY + Col_Y,
+                         Width - Col_Width - 1,
+                         Height - Col_Height - 1)) {
+
+        // Create entity collision queue
+        CEntityCol EntityCol;
+
+        // Push ourselves and the other Entity
+        EntityCol.EntityA = this;
+        EntityCol.EntityB = Entity;
+
+        // Position not valid
+        return false;
+    }
+
+    // Position valid.
+    return true;
+}
+
+
+
+
+
+
+
+
+

@@ -22,8 +22,8 @@ class CCamera {
         int X;
         int Y;
 
-        int* TargetX;
-        int* TargetY;
+        float* TargetX;
+        float* TargetY;
 
     public:
         int TargetMode;
@@ -37,7 +37,7 @@ class CCamera {
 
         void SetPos(int posX, int posY);
         
-        void SetTarget(int* targetX, int* targetY);
+        void SetTarget(float* targetX, float* targetY);
 };
 
 #endif // CCAMERA_H defined

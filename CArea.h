@@ -27,6 +27,10 @@ class CArea {
         void OnRender(SDL_Surface* Surf_Display, int CameraX, int CameraY);
 
         void OnCleanup();
+
+        CMap* GetMap(int X, int Y);
+
+        CTile* GetTile(int X, int Y);
 };
 
 #endif // CAREA_H defined
