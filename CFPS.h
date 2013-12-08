@@ -12,23 +12,23 @@ class CFPS {
         static CFPS FPSControl;
 
     private:
-        int     OldTime;
-        int     LastTime;
+        unsigned    OldTime;
+        unsigned    LastTime;
 
-        float   SpeedFactor;
+        float	    SpeedFactor;
 
-        int     NumFrames;
-        int     Frames;
+        unsigned    NumFrames;
+        unsigned    Frames;
 
     public:
         CFPS();
 
-        void    OnLoop();
+        void	    OnLoop();
 
     public:
-        int     GetFPS();
+        unsigned    GetFPS();
 
-        float   GetSpeedFactor();
+        float	    GetSpeedFactor();
 };
 
 #endif // CFPS_H defined

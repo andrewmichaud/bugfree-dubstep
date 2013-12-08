@@ -37,7 +37,7 @@ void CFPS::OnLoop() {
 }
 
 // Get FPS
-int CFPS::GetFPS() { 
+unsigned CFPS::GetFPS() { 
     return NumFrames;
 }
 

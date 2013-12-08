@@ -59,15 +59,15 @@ void CAnimation::OnAnimate() {
 }
 
 // Simple setter
-void CAnimation::SetFrameRate(int Rate) {
+void CAnimation::SetFrameRate(unsigned int Rate) {
     FrameRate = Rate;
 }
 
 // Simple setter
-void CAnimation::SetCurrentFrame(int Frame) {
+void CAnimation::SetCurrentFrame(unsigned int Frame) {
     
     // Bounds checking
-    if (Frame < 0 || Frame >= MaxFrames) {
+    if (Frame >= MaxFrames) {
         return;
     }
 
@@ -75,7 +75,7 @@ void CAnimation::SetCurrentFrame(int Frame) {
 }
 
 // Simple getter
-int CAnimation::GetCurrentFrame() {
+unsigned int CAnimation::GetCurrentFrame() {
     return CurrentFrame;
 }
 

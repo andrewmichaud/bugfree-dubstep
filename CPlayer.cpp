@@ -55,7 +55,7 @@ void CPlayer::OnAnimate() {
 }
 
 // Collisions
-bool CPlayer::OnCollision(CEntity* Entity) {
+bool CPlayer::OnCollision(CEntity* ) { //Entity) {
     return true;
 }
 

@@ -73,7 +73,7 @@ void CMap::OnRender(SDL_Surface* Surf_Display, int MapX, int MapY) {
             int tY = MapY + (Y * TILE_SIZE);
 
             int TilesetX = (TileList[ID].TileID % TilesetWidth) * TILE_SIZE;
-            int TilesetY = (TileList[ID].TileID / TilesetWidth) * TILE_SIZE;
+            int TilesetY = (TileList[ID].TileID / TilesetHeight) * TILE_SIZE;
 
             // Draw
             CSurface::OnDraw(Surf_Display, Surf_Tileset, tX, tY, 
@@ -92,7 +92,7 @@ CTile* CMap::GetTile(int X, int Y) {
     ID += (MAP_WIDTH * (Y / TILE_SIZE));
 
     // Bounds checking
-    if (ID < 0 && ID >= TileList.size()) {
+    if (ID < 0 && (unsigned) ID >= TileList.size()) {
         return NULL;
     }
 

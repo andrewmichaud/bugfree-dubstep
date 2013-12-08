@@ -14,5 +14,7 @@
 #define WWIDTH          640
 #define WHEIGHT         480
 
+// Physics
+#define GRAVITY		0.75f
 #endif
 

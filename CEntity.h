@@ -50,6 +50,8 @@ class CEntity {
         // Whether entity is moving
         bool            MoveLeft;
         bool            MoveRight;
+        bool            MoveUp;
+        bool            MoveDown;
 
         // Flags for player
         int             Type;

@@ -27,11 +27,13 @@ CEntity::CEntity() {
     // Entities are not moving by default
     MoveLeft = false;
     MoveRight = false;
+    MoveUp = false;
+    MoveDown= false;
 
     // Entities default to generic, not dead, and affected by gravity.
     Type = ENTITY_TYPE_GENERIC;
     Dead = false;
-    Flags = ENTITY_FLAG_GRAVITY;
+    Flags = ENTITY_FLAG_GHOST;
 
     // Speed and acceleration are zero.
     SpeedX = 0;
@@ -92,6 +94,14 @@ void CEntity::OnLoop() {
     } else if (MoveRight) {
         AccelX = 0.5;
     
+    // Moving up
+    } else if (MoveUp) {
+        AccelY = -0.5;
+    
+    // Moving down
+    } else if (MoveDown) {
+        AccelY = 0.5;
+    
     // Not moving
     } else { 
         StopMove();
@@ -99,7 +109,7 @@ void CEntity::OnLoop() {
 
     // Check gravity
     if (Flags & ENTITY_FLAG_GRAVITY) {
-        AccelY = 0.75f;
+        AccelY = GRAVITY;
     }
 
     // Apply speed changes.
@@ -167,7 +177,8 @@ void CEntity::OnAnimate() {
 
 // Handle collisions.
 // Overridden on a per-entity basis
-bool CEntity::OnCollision(CEntity* Entity) {
+bool CEntity::OnCollision(CEntity*) {
+    return true;
 }
 
 // Handle movement
@@ -323,6 +334,22 @@ void CEntity::StopMove() {
         AccelX = 0;
         SpeedX = 0;
     }
+    
+    // If speed is positive, apply negative acceleration.
+    if (SpeedY > 0) {
+        AccelY = -1;
+    }
+
+    // If speed is negative, apply positive acceleration.
+    if (SpeedY < 0) {
+        AccelY =  1;
+    }
+
+    // Bounds checkng of how slow we should be going until we stop.
+    if (SpeedY < 2.0f && SpeedY > -2.0f) {
+        AccelY = 0;
+        SpeedY = 0;
+    }
 }
 
 // Check if this entity is colliding with another entity.
@@ -399,8 +426,11 @@ bool CEntity::PosValid(int NewX, int NewY) {
     } else {
         
         // Check all entities
-        for (int i = 0; i != EntityList.size(); i++) {
-            if (PosValidEntity(EntityList[i], NewX, NewY) == false) {
+        for (auto it = EntityList.begin(); 
+		it != EntityList.end(); 
+		it++) {
+            
+	    if (PosValidEntity(*it, NewX, NewY) == false) {
                 Return = false;
             }
         }
@@ -452,12 +482,4 @@ bool CEntity::PosValidEntity(CEntity* Entity, int NewX, int NewY) {
     // Position valid.
     return true;
 }
-
-
-
-
-
-
-
-
 

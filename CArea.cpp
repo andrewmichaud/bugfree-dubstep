@@ -101,7 +101,7 @@ void CArea::OnRender(SDL_Surface* Surf_Display, int CameraX, int CameraY) {
         int ID = FirstID + ((i / 2) * AreaSize) + (i % 2);
 
         // Error checking
-        if (ID < 0 || ID >= MapList.size()) {
+        if (ID < 0 || ID >= (int) MapList.size()) {
             continue;
         }
 
@@ -129,7 +129,7 @@ CMap* CArea::GetMap(int X, int Y) {
     ID += ((Y / MapHeight) * AreaSize);
 
     // Bounds checking
-    if (ID < 0 || ID >= MapList.size()) {
+    if (ID < 0 || ID >= (int) MapList.size()) {
         return NULL;
     }
 

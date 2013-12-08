@@ -36,7 +36,9 @@ bool CApp::OnInit() {
     // First: Use hardware memory to store stuff.
     // Second: Use double buffering
     // Note: SDL_FULLSCREEN to force fullscreen
-    if ((Surf_Display = SDL_SetVideoMode(WWIDTH, WHEIGHT, 32, SDL_HWSURFACE | 
+    if ((Surf_Display = SDL_SetVideoMode(WWIDTH, WHEIGHT, 32, 
+					 SDL_HWSURFACE | 
+					 SDL_FULLSCREEN |
                                          SDL_DOUBLEBUF)) == NULL) {
         return false;
     }
@@ -58,9 +60,10 @@ bool CApp::OnInit() {
         return false;
     }
 
-    Player.X = 100;
-    Player.Y = 100;
-
+    Player.X = 400;
+    Player.Y = 400;
+    
+    
     CEntity::EntityList.push_back(&Player);
 
 
@@ -101,8 +104,10 @@ void CApp::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
                 
                 // Movement
                 case SDLK_UP:       
+                    Player.MoveUp = true; 
                     break;
                 case SDLK_DOWN:
+                    Player.MoveDown = true; 
                     break;
                 case SDLK_LEFT:
                     Player.MoveLeft = true; 
@@ -136,8 +141,10 @@ void CApp::OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode) {
         default:
             switch (sym) {
                 case SDLK_UP:       
+                    Player.MoveUp = false; 
                     break;
                 case SDLK_DOWN:
+                    Player.MoveDown = false; 
                     break;
                 case SDLK_LEFT:
                     Player.MoveLeft = false; 
