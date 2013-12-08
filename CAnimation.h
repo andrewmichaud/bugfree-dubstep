@@ -9,17 +9,17 @@
 
 class CAnimation {
     private:
-        int CurrentFrame;
+        unsigned int CurrentFrame;
 
         int FrameInc;
 
     private:
-        int FrameRate; // in milliseconds
+        unsigned int FrameRate; // in milliseconds
 
-        long OldTime;
+        unsigned long OldTime;
 
     public:
-        int MaxFrames;
+        unsigned int MaxFrames;
 
         bool Oscillate;
 
@@ -29,11 +29,11 @@ class CAnimation {
         void OnAnimate();
 
     public:
-        void SetFrameRate(int Rate);
+        void SetFrameRate(unsigned int Rate);
 
-        void SetCurrentFrame(int Frame);
+        void SetCurrentFrame(unsigned int Frame);
 
-        int GetCurrentFrame();
+        unsigned int GetCurrentFrame();
 };
 
 #endif // CANIMATION_H defined

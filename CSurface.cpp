@@ -17,7 +17,7 @@ SDL_Surface* CSurface::OnLoad(char* File) {
     }
 
     // Get a new surface.
-    Surf_Return = SDL_DisplayFormat(Surf_Temp);
+    Surf_Return = SDL_DisplayFormatAlpha(Surf_Temp);
     
     // Free old one.
     SDL_FreeSurface(Surf_Temp);
