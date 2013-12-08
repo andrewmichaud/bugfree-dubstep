@@ -59,12 +59,12 @@ bool CApp::OnInit() {
     if (!Player.OnLoad(player_c, 64, 64, 8)) {
         return false;
     }
-
+    
     Player.X = 400;
     Player.Y = 400;
     
-    
     CEntity::EntityList.push_back(&Player);
+    CEntity::EntityList.push_back(&Player2);
 
 
     // Make cameras follow yoshi

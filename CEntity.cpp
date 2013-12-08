@@ -33,7 +33,7 @@ CEntity::CEntity() {
     // Entities default to generic, not dead, and affected by gravity.
     Type = ENTITY_TYPE_GENERIC;
     Dead = false;
-    Flags = ENTITY_FLAG_GHOST;
+    Flags = ENTITY_FLAG_GRAVITY;
 
     // Speed and acceleration are zero.
     SpeedX = 0;

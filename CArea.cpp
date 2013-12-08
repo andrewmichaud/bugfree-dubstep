@@ -97,8 +97,8 @@ void CArea::OnRender(SDL_Surface* Surf_Display, int CameraX, int CameraY) {
     //std::cout << "CArea::OnRender:: first id" << std::endl;
     // Render maps
     // TODO: get rid of magic numbers sometime.
-    for (int i = 0; i < 4; i++) {
-        int ID = FirstID + ((i / 2) * AreaSize) + (i % 2);
+    for (int i = 0; i < 9; i++) {
+        int ID = FirstID + ((i / 3) * AreaSize) + (i % 3);
 
         // Error checking
         if (ID < 0 || ID >= (int) MapList.size()) {

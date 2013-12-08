@@ -1,5 +1,7 @@
 tilesets/1.png
-3
-maps/1.map maps/2.map maps/1.map
-maps/4.map maps/3.map maps/1.map
-maps/5.map maps/6.map maps/1.map
+5
+maps/void.map maps/void.map maps/void.map maps/void.map maps/void.map
+maps/void.map maps/1.map maps/2.map maps/1.map maps/void.map
+maps/void.map maps/4.map maps/3.map maps/1.map maps/void.map
+maps/void.map maps/5.map maps/6.map maps/1.map maps/void.map
+maps/void.map maps/void.map maps/void.map maps/void.map maps/void.map
