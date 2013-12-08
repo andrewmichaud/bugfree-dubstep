@@ -3,21 +3,23 @@
 
 # ----- Make Variables -----
 
-OPTFLAGS  =   -O3 -march=native
+OPTFLAGS  =     -O3 -march=native
 DEFINES   =
 STD       =     -std=c++11
 CXXFLAGS  =	-g $(STD) $(OPTFLAGS) -Wall -Wextra -pedantic $(DEFINES) 
-CXX	  =	g++
+CXX	  =	g++ 
 LDLIBS    =     -lSDLmain -lSDL -lSDL_image 
-TARGETS   = 	main
+TARGETS   = 	bdPlatformer
 
 # ----- Make Rules -----
 
 all:	$(TARGETS)
 
-main:   CApp.o CSurface.o CEvent.o CAnimation.o CEntity.o CArea.o CMap.o \
-    CTile.o CCamera.o CFPS.o CPlayer.o
+bdPlatformer:   CApp.o CSurface.o CEvent.o CAnimation.o CEntity.o CArea.o \
+    CMap.o CTile.o CCamera.o CFPS.o CPlayer.o
 	$(CXX) -o $@ $^ $(LDLIBS)
+
+native: 
 clean:
 	rm -f $(TARGETS) *.o
 
