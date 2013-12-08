@@ -59,6 +59,7 @@ bool CApp::OnInit() {
     }
 
     Player.X = 100;
+    Player.Y = 100;
 
     CEntity::EntityList.push_back(&Player);
 
