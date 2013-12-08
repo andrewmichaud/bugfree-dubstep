@@ -219,20 +219,12 @@ void CEvent::OnInputBlur() {
 }
  
 // What to do on keypress
-void CEvent::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
-    std::cout << sym << std::endl;
-    switch(sym) {
-        case 27:
-            OnExit();
-            break;
-        default:
-            break;
-    }
+void CEvent::OnKeyDown(SDLKey, SDLMod, Uint16) {
     //Pure virtual, do nothing
 }
  
 // What to do on key unpress
-void CEvent::OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode) {
+void CEvent::OnKeyUp(SDLKey, SDLMod, Uint16) {
     //Pure virtual, do nothing
 }
  
@@ -247,68 +239,68 @@ void CEvent::OnMouseBlur() {
 }
  
 // What to do on mouse movement
-void CEvent::OnMouseMove(int mX, int mY, int relX, int relY, 
-                         bool Left, bool Right,bool Middle) {
+void CEvent::OnMouseMove(int, int, int, int, 
+                         bool, bool, bool) {
     //Pure virtual, do nothing
 }
  
 // Mouse wheel movement
-void CEvent::OnMouseWheel(bool Up, bool Down) {
+void CEvent::OnMouseWheel(bool, bool) {
     //Pure virtual, do nothing
 }
  
 // L button press
-void CEvent::OnLButtonDown(int mX, int mY) {
+void CEvent::OnLButtonDown(int, int) {
     //Pure virtual, do nothing
 }
  
 // L button unpress
-void CEvent::OnLButtonUp(int mX, int mY) {
+void CEvent::OnLButtonUp(int, int) {
     //Pure virtual, do nothing
 }
  
 // R Button press
-void CEvent::OnRButtonDown(int mX, int mY) {
+void CEvent::OnRButtonDown(int, int) {
     //Pure virtual, do nothing
 }
  
 // R Button unpress
-void CEvent::OnRButtonUp(int mX, int mY) {
+void CEvent::OnRButtonUp(int, int) {
     //Pure virtual, do nothing
 }
  
 // M Button press
-void CEvent::OnMButtonDown(int mX, int mY) {
+void CEvent::OnMButtonDown(int, int) {
     //Pure virtual, do nothing
 }
  
 // M Button unpress
-void CEvent::OnMButtonUp(int mX, int mY) {
+void CEvent::OnMButtonUp(int, int) {
     //Pure virtual, do nothing
 }
  
 // Joystick axis movement
-void CEvent::OnJoyAxis(Uint8 which,Uint8 axis,Sint16 value) {
+void CEvent::OnJoyAxis(Uint8, Uint8, Sint16) {
     //Pure virtual, do nothing
 }
  
 // Handle joystick button press
-void CEvent::OnJoyButtonDown(Uint8 which,Uint8 button) {
+void CEvent::OnJoyButtonDown(Uint8, Uint8) {
     //Pure virtual, do nothing
 }
  
 // Handle joystick button unpress
-void CEvent::OnJoyButtonUp(Uint8 which,Uint8 button) {
+void CEvent::OnJoyButtonUp(Uint8, Uint8) {
     //Pure virtual, do nothing
 }
  
 // Handle joystick hat press
-void CEvent::OnJoyHat(Uint8 which,Uint8 hat,Uint8 value) {
+void CEvent::OnJoyHat(Uint8, Uint8, Uint8) {
     //Pure virtual, do nothing
 }
  
 // Handle joystick ball movement
-void CEvent::OnJoyBall(Uint8 which,Uint8 ball,Sint16 xrel,Sint16 yrel) {
+void CEvent::OnJoyBall(Uint8, Uint8, Sint16, Sint16) {
     //Pure virtual, do nothing
 }
  
@@ -323,7 +315,7 @@ void CEvent::OnRestore() {
 }
  
 // Handle resize
-void CEvent::OnResize(int w,int h) {
+void CEvent::OnResize(int, int) {
     //Pure virtual, do nothing
 }
  
@@ -338,6 +330,6 @@ void CEvent::OnExit() {
 }
  
 // Handle other stuff
-void CEvent::OnUser(Uint8 type, int code, void* data1, void* data2) {
+void CEvent::OnUser(Uint8, int, void*, void*) {
     //Pure virtual, do nothing
 }
