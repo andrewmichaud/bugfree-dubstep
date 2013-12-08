@@ -30,8 +30,8 @@ CPlayer::CPlayer() {
     AccelX = 0;
     AccelY = 0;
 
-    MaxSpeedX = 5;
-    MaxSpeedY = 5;
+    MaxSpeedX = 10;
+    MaxSpeedY = 10;
 
     CurrentFrameCol = 0;
     CurrentFrameRow = 0;

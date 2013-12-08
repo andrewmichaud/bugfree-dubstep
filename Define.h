@@ -10,11 +10,11 @@
 #define MAP_HEIGHT      20
 
 // Defines size of tile, which is a part of a map.
-#define TILE_SIZE       16
+#define TILE_SIZE       32
 #define WWIDTH          640
 #define WHEIGHT         480
 
 // Physics
-#define GRAVITY		0.75f
+#define GRAVITY		1.0f
 #endif
 

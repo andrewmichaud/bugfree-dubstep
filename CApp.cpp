@@ -60,12 +60,10 @@ bool CApp::OnInit() {
         return false;
     }
     
-    Player.X = 400;
-    Player.Y = 400;
+    Player.X = 1.5 * (MAP_WIDTH * TILE_SIZE);
+    Player.Y = 1.5 * (MAP_HEIGHT * TILE_SIZE);
     
     CEntity::EntityList.push_back(&Player);
-    CEntity::EntityList.push_back(&Player2);
-
 
     // Make cameras follow yoshi
     CCamera::CameraControl.TargetMode = TARGET_MODE_CENTER;
