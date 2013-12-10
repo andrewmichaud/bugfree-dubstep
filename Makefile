@@ -7,7 +7,7 @@ OPTFLAGS  =     -O3 -march=native
 DEFINES   =
 STD       =     -std=c++11
 CXXFLAGS  =	-g $(STD) $(OPTFLAGS) -Wall -Wextra -pedantic $(DEFINES) 
-CXX	  =	g++ 
+CXX	  =	clang++
 LDLIBS    =     -lSDLmain -lSDL -lSDL_image 
 TARGETS   = 	bdPlatformer
 

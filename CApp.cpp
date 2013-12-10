@@ -38,7 +38,6 @@ bool CApp::OnInit() {
     // Note: SDL_FULLSCREEN to force fullscreen
     if ((Surf_Display = SDL_SetVideoMode(WWIDTH, WHEIGHT, 32, 
 					 SDL_HWSURFACE | 
-					 SDL_FULLSCREEN |
                                          SDL_DOUBLEBUF)) == NULL) {
         return false;
     }
