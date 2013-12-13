@@ -3,19 +3,23 @@
 
 # ----- Make Variables -----
 
-OPTFLAGS  =   -O3 -march=native
+OPTFLAGS  =     -O3 -march=native
 DEFINES   =
-CXXFLAGS  =	-g $(OPTFLAGS) -Wall -Wextra -pedantic $(DEFINES) 
-CXX	  =	g++
-LDLIBS    =     -lGL -lglut -lGLEW -lm
-TARGETS   = 	main
+STD       =     -std=c++11
+CXXFLAGS  =	-g $(STD) $(OPTFLAGS) -Wall -Wextra -pedantic $(DEFINES) 
+CXX	  =	clang++
+LDLIBS    =     -lSDLmain -lSDL -lSDL_image 
+TARGETS   = 	bdPlatformer
 
 # ----- Make Rules -----
 
 all:	$(TARGETS)
 
-main: cube.o shader_utils.o
+bdPlatformer:   CApp.o CSurface.o CEvent.o CAnimation.o CEntity.o CArea.o \
+    CMap.o CTile.o CCamera.o CFPS.o CPlayer.o
 	$(CXX) -o $@ $^ $(LDLIBS)
+
+native: 
 clean:
 	rm -f $(TARGETS) *.o
 
@@ -34,6 +38,26 @@ clean:
 # See http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html
 # ------ Dependences (.cpp -> .o using default Makefile rule) -----
 
-cube.o: cube.cpp shader_utils.hpp
+CApp.o: CApp.cpp CApp.h CSurface.h CEvent.h CAnimation.h CEntity.h CArea.h \
+    CMap.h CTile.h CCamera.h CFPS.h CPlayer.h Define.h
 
-shader_utils.o: shader_utils.cpp shader_utils.hpp
+CSurface.o: CSurface.cpp CSurface.h
+
+CEvent.o: CEvent.cpp CEvent.h
+
+CAnimation.o: CAnimation.cpp CAnimation.h
+
+CEntity.o: CEntity.cpp CEntity.h CAnimation.h CCamera.h CFPS.h CSurface.h \
+    CArea.h
+
+CArea.o: CArea.cpp CArea.h
+
+CMap.o: CMap.cpp CMap.h
+
+CTile.o: CTile.cpp CTile.h
+
+CCamera.o: CCamera.cpp CCamera.h
+
+CFPS.o: CFPS.cpp CFPS.h
+
+CPlayer.o: CPlayer.cpp CPlayer.h CEntity.h
