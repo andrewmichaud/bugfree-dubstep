@@ -19,8 +19,8 @@ CApp::CApp() {
 bool CApp::OnInit() {
     
     // Animation stuff
-    Anim_Yoshi.MaxFrames = 8;
-    Anim_Yoshi.Oscillate = false;
+    Anim_Player.MaxFrames = 8;
+    Anim_Player.Oscillate = false;
     
     // Attempt to init SDL. If it fails, return false.
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -51,7 +51,7 @@ bool CApp::OnInit() {
         return false;
     }
 
-    std::string player = "yoshi.png";
+    std::string player = "femplayer.png";
     char* player_c = (char*) player.c_str();
 
     // Create players.
@@ -162,7 +162,7 @@ void CApp::OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode) {
 
 void CApp::OnLoop() {
     // For animation
-    Anim_Yoshi.OnAnimate();
+    Anim_Player.OnAnimate();
     CFPS::FPSControl.OnLoop();
     // Animate all entities.
     for (unsigned i = 0; i < CEntity::EntityList.size(); i++) {
@@ -200,7 +200,7 @@ void CApp::OnRender() {
     //CSurface::OnDraw(Surf_Display, Surf_Test, 100, 100, 0, 0, 50, 50);
 #if 0
     CSurface::OnDraw(Surf_Display, Surf_Test, 290, 220, 0, 
-                     Anim_Yoshi.GetCurrentFrame() * spriteheight, 64, spriteheight);
+                     Anim_Player.GetCurrentFrame() * spriteheight, 64, spriteheight);
 
     std::cout << "sprite drawn" << std::endl;
 #endif

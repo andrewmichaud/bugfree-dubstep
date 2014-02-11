@@ -27,7 +27,7 @@ class CApp : public CEvent {
         
         SDL_Surface*    Surf_Test;
     
-        CAnimation      Anim_Yoshi;
+        CAnimation      Anim_Player;
 
         CEntity         Entity1;
         CEntity         Entity2;
