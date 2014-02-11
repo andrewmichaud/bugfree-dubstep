@@ -2,8 +2,8 @@
 // FPS header file
 // 12/05/13
 
-#ifndef CFPS_H
-#define CFPS_H 1
+#ifndef CFPS_HPP
+#define CFPS_HPP 1
 
 #include <SDL/SDL.h>
 
@@ -31,5 +31,5 @@ class CFPS {
         float	    GetSpeedFactor();
 };
 
-#endif // CFPS_H defined
+#endif // CFPS_HPP defined
 

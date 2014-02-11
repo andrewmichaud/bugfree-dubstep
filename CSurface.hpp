@@ -1,5 +1,5 @@
-#ifndef CSURFACE_H
-#define CSURFACE_H 1
+#ifndef CSURFACE_HPP
+#define CSURFACE_HPP 1
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
@@ -24,4 +24,4 @@ class CSurface {
         static bool Transparent(SDL_Surface* Surf_Dest, int R, int G, int B);
 };
 
-#endif // CSURFACE_H defined
+#endif // CSURFACE_HPP defined

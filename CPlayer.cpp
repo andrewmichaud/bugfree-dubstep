@@ -2,7 +2,7 @@
 // Implementation file for CPlayer
 // 12/06/13
 
-#include "CPlayer.h"
+#include "CPlayer.hpp"
 
 CPlayer::CPlayer() {
     Surf_Entity = NULL;

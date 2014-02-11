@@ -3,7 +3,7 @@
 // Andrew Michaud
 // 12/02/13
 
-#include "CEntity.h"
+#include "CEntity.hpp"
 
 // List of all our entities.
 std::vector<CEntity*> CEntity::EntityList;

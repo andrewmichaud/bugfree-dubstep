@@ -2,14 +2,14 @@
 // Header file for map class
 // 12/05/13
 
-#ifndef CMAP_H
-#define CMAP_H 1
+#ifndef CMAP_HPP
+#define CMAP_HPP 1
 
 #include <SDL/SDL.h>
 #include <vector>
 
-#include "CTile.h"
-#include "CSurface.h"
+#include "CTile.hpp"
+#include "CSurface.hpp"
 
 class CMap {
     public:
@@ -29,5 +29,5 @@ class CMap {
 
         CTile* GetTile(int X, int Y);
 };
-#endif // CMAP_H defined
+#endif // CMAP_HPP defined
 

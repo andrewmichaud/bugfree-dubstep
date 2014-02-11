@@ -1,4 +1,4 @@
-#include "CApp.h"
+#include "CApp.hpp"
 #include <iostream>
 
 // Implementation file for main app

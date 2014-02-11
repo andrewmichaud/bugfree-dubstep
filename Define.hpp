@@ -2,8 +2,8 @@
 // Defines values needed to do stuff
 // 12/02/13
 
-#ifndef DEFINE_H
-#define DEFINE_H 1
+#ifndef DEFINE_HPP
+#define DEFINE_HPP 1
 
 // Size of the map, which contains many tiles
 #define MAP_WIDTH       20
@@ -16,5 +16,6 @@
 
 // Physics
 #define GRAVITY		1.0f
-#endif
+
+#endif // DEFINE_HPP included
 

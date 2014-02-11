@@ -2,8 +2,8 @@
 // Andrew Michaud
 // 11/29/13
 
-#ifndef CANIMATION_H
-#define CANIMATION_H 1
+#ifndef CANIMATION_HPP
+#define CANIMATION_HPP 1
 
 #include <SDL/SDL.h>
 
@@ -36,4 +36,4 @@ class CAnimation {
         unsigned int GetCurrentFrame();
 };
 
-#endif // CANIMATION_H defined
+#endif // CANIMATION_HPP defined

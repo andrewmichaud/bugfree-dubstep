@@ -2,7 +2,7 @@
 // Implementation for CTile
 // 12/02/13
 
-#include "CTile.h"
+#include "CTile.hpp"
 
 CTile::CTile() {
     TileID = 0,

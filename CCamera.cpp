@@ -2,7 +2,7 @@
 // Camera implementation file
 // 12/05/13
 
-#include "CCamera.h"
+#include "CCamera.hpp"
 
 CCamera CCamera::CameraControl;
 

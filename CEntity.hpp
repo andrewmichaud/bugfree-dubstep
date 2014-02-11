@@ -1,16 +1,16 @@
-#ifndef CENTITY_H
-#define CENTITY_H 1
-
 // Header file for CEntity
 // Andrew Michaud
 // 12/02/13
 
+#ifndef CENTITY_HPP
+#define CENTITY_HPP 1
+
 #include <vector>
-#include "CArea.h"
-#include "CAnimation.h"
-#include "CCamera.h"
-#include "CFPS.h"
-#include "CSurface.h"
+#include "CArea.hpp"
+#include "CAnimation.hpp"
+#include "CCamera.hpp"
+#include "CFPS.hpp"
+#include "CSurface.hpp"
 
 // Indicate whether entity is player or not
 enum {
@@ -137,5 +137,5 @@ class CEntityCol {
 
 };
 
-#endif // CENTITY_H defined.
+#endif // CENTITY_HPP defined.
 

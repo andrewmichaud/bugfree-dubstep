@@ -2,8 +2,8 @@
 // 11/28/13
 // Event-handling code for OpenGL game
 
-#ifndef CEVENT_H
-#define CEVENT_H
+#ifndef CEVENT_HPP
+#define CEVENT_HPP
 
 #include <iostream>
 #include <SDL/SDL.h>
@@ -72,5 +72,5 @@ class CEvent {
         virtual void OnUser(Uint8 type, int code, void* data1, void* data2);
 };
 
-#endif //CEVENT_H defined
+#endif //CEVENT_HPP defined
 
