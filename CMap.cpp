@@ -2,7 +2,7 @@
 // CMap implementation file
 // 12/05/13
 
-#include "CMap.h"
+#include "CMap.hpp"
 #include <iostream>
 
 CMap::CMap() {

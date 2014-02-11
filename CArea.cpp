@@ -2,7 +2,7 @@
 // CArea implementation file
 // 12/05/13
 
-#include "CArea.h"
+#include "CArea.hpp"
 #include <iostream>
 
 CArea CArea::AreaControl;

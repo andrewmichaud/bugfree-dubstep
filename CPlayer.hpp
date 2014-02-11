@@ -2,10 +2,10 @@
 // Header file for player - special kind of entity
 // 12/06/13
 
-#ifndef CPLAYER_H
-#define CPLAYER_H 1
+#ifndef CPLAYER_HPP
+#define CPLAYER_HPP 1
 
-#include "CEntity.h"
+#include "CEntity.hpp"
 
 class CPlayer : public CEntity {
     public:
@@ -24,6 +24,5 @@ class CPlayer : public CEntity {
         bool OnCollision(CEntity* Entity);
 };
 
-
-#endif // CPLAYER_H defined
+#endif // CPLAYER_HPP defined
 

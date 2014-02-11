@@ -35,29 +35,29 @@ clean:
 #   $<  The name of the first prerequisite (e.g., stringhash-test.o); not used
 #       in these rules, but sometimes useful
 #
-# See http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html
+# See http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.hpptml
 # ------ Dependences (.cpp -> .o using default Makefile rule) -----
 
-CApp.o: CApp.cpp CApp.h CSurface.h CEvent.h CAnimation.h CEntity.h CArea.h \
-    CMap.h CTile.h CCamera.h CFPS.h CPlayer.h Define.h
+CApp.o: CApp.cpp CApp.hpp CSurface.hpp CEvent.hpp CAnimation.hpp CEntity.hpp CArea.hpp \
+    CMap.hpp CTile.hpp CCamera.hpp CFPS.hpp CPlayer.hpp Define.hpp
 
-CSurface.o: CSurface.cpp CSurface.h
+CSurface.o: CSurface.cpp CSurface.hpp
 
-CEvent.o: CEvent.cpp CEvent.h
+CEvent.o: CEvent.cpp CEvent.hpp
 
-CAnimation.o: CAnimation.cpp CAnimation.h
+CAnimation.o: CAnimation.cpp CAnimation.hpp
 
-CEntity.o: CEntity.cpp CEntity.h CAnimation.h CCamera.h CFPS.h CSurface.h \
-    CArea.h
+CEntity.o: CEntity.cpp CEntity.hpp CAnimation.hpp CCamera.hpp CFPS.hpp CSurface.hpp \
+    CArea.hpp
 
-CArea.o: CArea.cpp CArea.h
+CArea.o: CArea.cpp CArea.hpp
 
-CMap.o: CMap.cpp CMap.h
+CMap.o: CMap.cpp CMap.hpp
 
-CTile.o: CTile.cpp CTile.h
+CTile.o: CTile.cpp CTile.hpp
 
-CCamera.o: CCamera.cpp CCamera.h
+CCamera.o: CCamera.cpp CCamera.hpp
 
-CFPS.o: CFPS.cpp CFPS.h
+CFPS.o: CFPS.cpp CFPS.hpp
 
-CPlayer.o: CPlayer.cpp CPlayer.h CEntity.h
+CPlayer.o: CPlayer.cpp CPlayer.hpp CEntity.hpp

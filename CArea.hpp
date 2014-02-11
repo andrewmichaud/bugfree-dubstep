@@ -2,10 +2,10 @@
 // Area header file
 // 12/05/13
 
-#ifndef CAREA_H
-#define CAREA_H 1
+#ifndef CAREA_HPP
+#define CAREA_HPP 1
 
-#include "CMap.h"
+#include "CMap.hpp"
 
 class CArea {
     public:
@@ -33,5 +33,5 @@ class CArea {
         CTile* GetTile(int X, int Y);
 };
 
-#endif // CAREA_H defined
+#endif // CAREA_HPP defined
 

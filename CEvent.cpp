@@ -2,7 +2,7 @@
 // Andrew Michaud
 // 11/28/13
 
-#include "CEvent.h"
+#include "CEvent.hpp"
 
 CEvent::CEvent() {
 }

@@ -2,7 +2,7 @@
 // Andrew Michaud
 // 11/29/13
 
-#include "CAnimation.h"
+#include "CAnimation.hpp"
 
 // Constructor
 CAnimation::CAnimation() {

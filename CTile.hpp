@@ -2,10 +2,10 @@
 // CTile header file
 // 12/02/13
 
-#ifndef CTILE_H
-#define CTILE_H 1
+#ifndef CTILE_HPP
+#define CTILE_HPP 1
 
-#include "Define.h"
+#include "Define.hpp"
 
 enum {
     TILE_TYPE_NONE = 0,
@@ -24,5 +24,5 @@ class CTile {
         CTile();
 };
 
-#endif
+#endif // CTILE_HPP defined.
 

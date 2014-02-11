@@ -8,15 +8,15 @@
 #include <string>
 
 #include <SDL/SDL.h>
-#include "CAnimation.h"
-#include "CEvent.h"
-#include "CSurface.h"
-#include "CEntity.h"
-#include "CArea.h"
-#include "CCamera.h"
-#include "CPlayer.h"
+#include "CAnimation.hpp"
+#include "CEvent.hpp"
+#include "CSurface.hpp"
+#include "CEntity.hpp"
+#include "CArea.hpp"
+#include "CCamera.hpp"
+#include "CPlayer.hpp"
 
-#include "Define.h"
+#include "Define.hpp"
 
 class CApp : public CEvent {
 
@@ -27,7 +27,7 @@ class CApp : public CEvent {
         
         SDL_Surface*    Surf_Test;
     
-        CAnimation      Anim_Yoshi;
+        CAnimation      Anim_Player;
 
         CEntity         Entity1;
         CEntity         Entity2;

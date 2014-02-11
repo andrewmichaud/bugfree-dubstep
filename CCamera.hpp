@@ -2,12 +2,12 @@
 // Camera header file
 // 12/05/13
 
-#ifndef CCAMERA_H
-#define CCAMERA_H 1
+#ifndef CCAMERA_HPP
+#define CCAMERA_HPP 1
 
 #include <SDL/SDL.h>
 
-#include "Define.h"
+#include "Define.hpp"
 
 enum {
     TARGET_MODE_NORMAL = 0,
@@ -40,5 +40,5 @@ class CCamera {
         void SetTarget(float* targetX, float* targetY);
 };
 
-#endif // CCAMERA_H defined
+#endif // CCAMERA_HPP defined
 
